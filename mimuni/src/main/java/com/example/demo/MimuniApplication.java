@@ -13,10 +13,11 @@ import com.example.demo.modelo.Personal;
 import com.example.demo.modelo.Vecino;
 import com.example.demo.modelo.Vecinoregistrado;
 import com.example.demo.repository.*;
+import com.example.demo.service.PersonalService;
 
 @SpringBootApplication
 public class MimuniApplication implements CommandLineRunner {
-
+	//Repositorios
 	@Autowired
 	BarrioRepository repobarrio;
 
@@ -28,6 +29,11 @@ public class MimuniApplication implements CommandLineRunner {
 	
 	@Autowired
 	PersonalRepository repopersonal;
+	
+	//Services
+	@Autowired
+	PersonalService personalservice;
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(MimuniApplication.class, args);
@@ -39,7 +45,9 @@ public class MimuniApplication implements CommandLineRunner {
 //		mostrarVecinos();
 //		register("DNI28000429", "ignaciodorigo@nacho0305sadasd.com.ar");
 //		mostrarVecinosRegistrados();
-		mostrarPersonal();
+//		mostrarPersonal();
+//		System.out.println(personalservice.cambiarPassword(1, "password", "alpachiri", "alpachiri"));
+		
 
 	}
 

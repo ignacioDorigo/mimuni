@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.modelo.Barrio;
+import com.example.demo.modelo.Personal;
 import com.example.demo.modelo.Vecino;
 import com.example.demo.modelo.Vecinoregistrado;
 import com.example.demo.repository.*;
@@ -24,6 +25,9 @@ public class MimuniApplication implements CommandLineRunner {
 
 	@Autowired
 	VecinoregistradoRepository repovecinoregistrado;
+	
+	@Autowired
+	PersonalRepository repopersonal;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MimuniApplication.class, args);
@@ -33,8 +37,9 @@ public class MimuniApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 //		mostrarBarrios();
 //		mostrarVecinos();
-		register("DNI28000429", "ignaciodorigo@nacho0305sadasd.com.ar");
-		mostrarVecinosRegistrados();
+//		register("DNI28000429", "ignaciodorigo@nacho0305sadasd.com.ar");
+//		mostrarVecinosRegistrados();
+		mostrarPersonal();
 
 	}
 
@@ -74,6 +79,13 @@ public class MimuniApplication implements CommandLineRunner {
 			} else {
 				System.out.println("No puede registrarse xq no es vecino");
 			}
+		}
+	}
+	
+	public void mostrarPersonal() {
+		List<Personal> inspectores = repopersonal.findAll();
+		for(Personal inspector: inspectores) {
+			System.out.println(inspector);
 		}
 	}
 

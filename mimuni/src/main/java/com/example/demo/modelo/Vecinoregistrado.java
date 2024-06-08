@@ -14,10 +14,11 @@ public class Vecinoregistrado {
 	private String documento;
 	
 	@Basic
-	
 	private String mail;
+	
 	@Basic
 	private String contrasenia;
+	
 	@Basic
 	private String estado;
 	

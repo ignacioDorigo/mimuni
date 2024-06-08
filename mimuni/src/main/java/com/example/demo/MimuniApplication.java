@@ -50,14 +50,14 @@ public class MimuniApplication implements CommandLineRunner {
 //		mostrarVecinosRegistrados();
 //		mostrarPersonal();
 //		System.out.println(personalservice.cambiarPassword(1, "password", "alpachiri", "alpachiri"));
-		agregarServicio();
-		
-		
-		mostrarServiciosComercio();
-		
+//		agregarServicio();
+//		eliminarServicio();
+
+//		mostrarServiciosComercio();
+//		mostrarServiciosComerciosHabilitados();
 	}
 
-	public void mostrarBarrios() {	
+	public void mostrarBarrios() {
 		List<Barrio> barrios = repobarrio.findAll();
 		for (Barrio barrio : barrios) {
 			System.out.println(barrio);
@@ -109,13 +109,32 @@ public class MimuniApplication implements CommandLineRunner {
 			System.out.println(servicio);
 		}
 	}
-	
+
 	public void agregarServicio() {
 //		Hay que hacer la verificacion qde que ya este logueado//
 		Optional<Vecinoregistrado> vecinoOptional = repovecinoregistrado.findById("DNI28000429");
 		Vecinoregistrado vecino = vecinoOptional.get();
-		ServicioComercio servicioNuevo = new ServicioComercio("Avenida Cordoba 234", "1124023223", "Vendemos empanadas pizzitas y panchitos", vecino);
+		ServicioComercio servicioNuevo = new ServicioComercio("Avenida Cordoba 234", "1124023223",
+				"Vendemos empanadas pizzitas y panchitos", vecino, "B");
 		servicio.save(servicioNuevo);
+	}
+
+// HAY QUE HACER MEJOR 
+	public void eliminarServicio() {
+		Optional<ServicioComercio> servicioOptional = servicio.findById(3);
+		if (servicioOptional.isPresent()) {
+			System.out.println("Entre en el IF");
+			servicio.deleteById(3);
+		} else {
+			System.out.println("NO EXISTE ESE REGISTRO");
+		}
+	}
+
+	public void mostrarServiciosComerciosHabilitados() {
+		List<ServicioComercio> servicios = servicio.findByEstado("H");
+		for (ServicioComercio servicio : servicios) {
+			System.out.println(servicio);
+		}
 	}
 
 }

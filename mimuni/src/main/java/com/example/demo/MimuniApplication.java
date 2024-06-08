@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.modelo.Barrio;
 import com.example.demo.modelo.Personal;
 import com.example.demo.modelo.ServicioComercio;
+import com.example.demo.modelo.ServicioProfesional;
 import com.example.demo.modelo.Vecino;
 import com.example.demo.modelo.Vecinoregistrado;
 import com.example.demo.repository.*;
@@ -38,6 +39,9 @@ public class MimuniApplication implements CommandLineRunner {
 	@Autowired
 	ServicioComerciorRepository servicio;
 
+	@Autowired
+	ServicioProfesionalRepository servicioProfesional;
+
 	public static void main(String[] args) {
 		SpringApplication.run(MimuniApplication.class, args);
 	}
@@ -55,6 +59,9 @@ public class MimuniApplication implements CommandLineRunner {
 
 //		mostrarServiciosComercio();
 //		mostrarServiciosComerciosHabilitados();
+//		crearServicioProfesional();
+//		mostrarServiciosProfesionales();
+		eliminarServicioProfesional(1);
 	}
 
 	public void mostrarBarrios() {
@@ -135,6 +142,30 @@ public class MimuniApplication implements CommandLineRunner {
 		for (ServicioComercio servicio : servicios) {
 			System.out.println(servicio);
 		}
+	}
+	
+//Modificarrrrr
+	public void crearServicioProfesional() {
+//		Hay que hacer la verificacion qde que ya este logueado//
+		Optional<Vecinoregistrado> vecinoOptional = repovecinoregistrado.findById("DNI28000429");
+		Vecinoregistrado vecino = vecinoOptional.get();
+		Optional<Vecino> vecOp = repovecino.findById(vecino.getDocumento());
+		Vecino vec = vecOp.get();
+		ServicioProfesional servicio = new ServicioProfesional(vec.getNombre(), vec.getApellido(), "11240223",
+				"16 a 20hs", "Comida", "Hacemos un rico asado", vecino, "B");
+		servicioProfesional.save(servicio);
+	}
+
+	public void mostrarServiciosProfesionales() {
+		System.out.println("   SERVICIOS    PROFESIONALES     ");
+		List<ServicioProfesional> servicios = servicioProfesional.findAll();
+		for (ServicioProfesional servicio : servicios) {
+			System.out.println(servicio);
+		}
+	}
+	
+	public void eliminarServicioProfesional(Integer id) {
+		servicioProfesional.deleteById(id);
 	}
 
 }

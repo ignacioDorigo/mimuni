@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.modelo.Personal;
+import com.example.demo.modelo.ServicioProfesional;
 import com.example.demo.service.PersonalService;
+import com.example.demo.service.ServicioProfesionalService;
 import com.example.demo.service.VecinoService;
 
 import jakarta.persistence.Entity;
@@ -23,8 +25,12 @@ import jakarta.persistence.Entity;
 public class Controlador {
 	@Autowired
 	PersonalService personalservice;
+
 	@Autowired
 	VecinoService vecinoservice;
+
+	@Autowired
+	ServicioProfesionalService profesionalservice;
 
 	@PostMapping("/loginInspector")
 	public ResponseEntity<String> loginInspector(@RequestParam Integer legajo, @RequestParam String password) {
@@ -51,25 +57,30 @@ public class Controlador {
 			return ResponseEntity.status(400).body("Error al cambiar la contraseña");
 		}
 	}
-	
+
 	@PostMapping("/register")
-	public ResponseEntity<String> register(@RequestParam String documento, @RequestParam String mail){
+	public ResponseEntity<String> register(@RequestParam String documento, @RequestParam String mail) {
 		String resultado = vecinoservice.register2(documento, mail);
-		if(resultado.equals("Registro exitoso")) {
+		if (resultado.equals("Registro exitoso")) {
 			return ResponseEntity.ok(resultado);
-		}else {
+		} else {
+			return ResponseEntity.status(400).body(resultado);
+		}
+	}
+
+	@PostMapping("/loginVecino")
+	public ResponseEntity<String> loginVecino(@RequestParam String mail, @RequestParam String contrasenia) {
+		String resultado = vecinoservice.login(mail, contrasenia);
+		if (resultado.equals("Ingreso exitoso")) {
+			return ResponseEntity.ok(resultado);
+		} else {
 			return ResponseEntity.status(400).body(resultado);
 		}
 	}
 	
-	@PostMapping("/loginVecino")
-	public ResponseEntity<String> loginVecino(@RequestParam String mail, @RequestParam String contrasenia){
-		String resultado =vecinoservice.login(mail, contrasenia);
-		if(resultado.equals("Ingreso exitoso")) {
-			return ResponseEntity.ok(resultado);
-		}else {
-			return ResponseEntity.status(400).body(resultado);
-		}
+	@GetMapping("/servicios/profesionales")
+	public List<ServicioProfesional> serviciosProfesionales(){
+		return profesionalservice.serviciosProfesionalesHabilitados();
 	}
 
 }

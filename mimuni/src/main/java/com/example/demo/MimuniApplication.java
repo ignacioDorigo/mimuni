@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.modelo.Barrio;
 import com.example.demo.modelo.Personal;
+import com.example.demo.modelo.ServicioComercio;
 import com.example.demo.modelo.Vecino;
 import com.example.demo.modelo.Vecinoregistrado;
 import com.example.demo.repository.*;
@@ -17,7 +18,7 @@ import com.example.demo.service.PersonalService;
 
 @SpringBootApplication
 public class MimuniApplication implements CommandLineRunner {
-	//Repositorios
+	// Repositorios
 	@Autowired
 	BarrioRepository repobarrio;
 
@@ -26,14 +27,16 @@ public class MimuniApplication implements CommandLineRunner {
 
 	@Autowired
 	VecinoregistradoRepository repovecinoregistrado;
-	
+
 	@Autowired
 	PersonalRepository repopersonal;
-	
-	//Services
+
+	// Services
 	@Autowired
 	PersonalService personalservice;
-	
+
+	@Autowired
+	ServicioComerciorRepository servicio;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MimuniApplication.class, args);
@@ -47,11 +50,14 @@ public class MimuniApplication implements CommandLineRunner {
 //		mostrarVecinosRegistrados();
 //		mostrarPersonal();
 //		System.out.println(personalservice.cambiarPassword(1, "password", "alpachiri", "alpachiri"));
+		agregarServicio();
 		
-
+		
+		mostrarServiciosComercio();
+		
 	}
 
-	public void mostrarBarrios() {
+	public void mostrarBarrios() {	
 		List<Barrio> barrios = repobarrio.findAll();
 		for (Barrio barrio : barrios) {
 			System.out.println(barrio);
@@ -73,28 +79,43 @@ public class MimuniApplication implements CommandLineRunner {
 		}
 	}
 
-//	public void register(String documento, String mail) {
-//		Optional<Vecinoregistrado> vecinoYaRegistrado = repovecinoregistrado.findById(documento);
-//		if (vecinoYaRegistrado.isPresent()) {
-//			System.out.println("YA ESTAS REGISTRADO");
-//		} else {
-//			Optional<Vecino> vecinoOptional = repovecino.findById(documento);
-//			if (vecinoOptional.isPresent()) {
-//				String contrasenia = documento;
-//				Vecinoregistrado nuevoVecino = new Vecinoregistrado(documento, mail, contrasenia, "B", "S");
-//				repovecinoregistrado.save(nuevoVecino);
-//				System.out.println("Registro exitoso");
-//			} else {
-//				System.out.println("No puede registrarse xq no es vecino");
-//			}
-//		}
-//	}
-	
+	public void register(String documento, String mail) {
+		Optional<Vecinoregistrado> vecinoYaRegistrado = repovecinoregistrado.findById(documento);
+		if (vecinoYaRegistrado.isPresent()) {
+			System.out.println("YA ESTAS REGISTRADO");
+		} else {
+			Optional<Vecino> vecinoOptional = repovecino.findById(documento);
+			if (vecinoOptional.isPresent()) {
+				String contrasenia = documento;
+				Vecinoregistrado nuevoVecino = new Vecinoregistrado(documento, mail, contrasenia, "B", "S");
+				repovecinoregistrado.save(nuevoVecino);
+				System.out.println("Registro exitoso");
+			} else {
+				System.out.println("No puede registrarse xq no es vecino");
+			}
+		}
+	}
+
 	public void mostrarPersonal() {
 		List<Personal> inspectores = repopersonal.findAll();
-		for(Personal inspector: inspectores) {
+		for (Personal inspector : inspectores) {
 			System.out.println(inspector);
 		}
+	}
+
+	public void mostrarServiciosComercio() {
+		List<ServicioComercio> servicios = servicio.findAll();
+		for (ServicioComercio servicio : servicios) {
+			System.out.println(servicio);
+		}
+	}
+	
+	public void agregarServicio() {
+//		Hay que hacer la verificacion qde que ya este logueado//
+		Optional<Vecinoregistrado> vecinoOptional = repovecinoregistrado.findById("DNI28000429");
+		Vecinoregistrado vecino = vecinoOptional.get();
+		ServicioComercio servicioNuevo = new ServicioComercio("Avenida Cordoba 234", "1124023223", "Vendemos empanadas pizzitas y panchitos", vecino);
+		servicio.save(servicioNuevo);
 	}
 
 }

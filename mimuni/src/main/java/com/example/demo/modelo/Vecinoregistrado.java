@@ -4,6 +4,7 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +26,7 @@ public class Vecinoregistrado {
 	@Column(name="primeringreso")
 	private String primerIngreso;
 	
+
 	public Vecinoregistrado() {
 		
 	}

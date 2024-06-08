@@ -73,22 +73,22 @@ public class MimuniApplication implements CommandLineRunner {
 		}
 	}
 
-	public void register(String documento, String mail) {
-		Optional<Vecinoregistrado> vecinoYaRegistrado = repovecinoregistrado.findById(documento);
-		if (vecinoYaRegistrado.isPresent()) {
-			System.out.println("YA ESTAS REGISTRADO");
-		} else {
-			Optional<Vecino> vecinoOptional = repovecino.findById(documento);
-			if (vecinoOptional.isPresent()) {
-				String contrasenia = documento;
-				Vecinoregistrado nuevoVecino = new Vecinoregistrado(documento, mail, contrasenia, "B", "S");
-				repovecinoregistrado.save(nuevoVecino);
-				System.out.println("Registro exitoso");
-			} else {
-				System.out.println("No puede registrarse xq no es vecino");
-			}
-		}
-	}
+//	public void register(String documento, String mail) {
+//		Optional<Vecinoregistrado> vecinoYaRegistrado = repovecinoregistrado.findById(documento);
+//		if (vecinoYaRegistrado.isPresent()) {
+//			System.out.println("YA ESTAS REGISTRADO");
+//		} else {
+//			Optional<Vecino> vecinoOptional = repovecino.findById(documento);
+//			if (vecinoOptional.isPresent()) {
+//				String contrasenia = documento;
+//				Vecinoregistrado nuevoVecino = new Vecinoregistrado(documento, mail, contrasenia, "B", "S");
+//				repovecinoregistrado.save(nuevoVecino);
+//				System.out.println("Registro exitoso");
+//			} else {
+//				System.out.println("No puede registrarse xq no es vecino");
+//			}
+//		}
+//	}
 	
 	public void mostrarPersonal() {
 		List<Personal> inspectores = repopersonal.findAll();

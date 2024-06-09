@@ -54,7 +54,8 @@ public class MimuniApplication implements CommandLineRunner {
 //		mostrarVecinosRegistrados();
 //		mostrarPersonal();
 //		System.out.println(personalservice.cambiarPassword(1, "password", "alpachiri", "alpachiri"));
-		agregarServicio();
+//		agregarServicio();
+		
 //		eliminarServicio();
 
 //		mostrarServiciosComercio();

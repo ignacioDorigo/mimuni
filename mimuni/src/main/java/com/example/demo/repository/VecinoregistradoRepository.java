@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface VecinoregistradoRepository extends JpaRepository<Vecinoregistrado, String> {
 	public List<Vecinoregistrado> findByMail(String mail);
+
 }

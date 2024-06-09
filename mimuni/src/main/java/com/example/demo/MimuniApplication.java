@@ -41,6 +41,9 @@ public class MimuniApplication implements CommandLineRunner {
 
 	@Autowired
 	ServicioProfesionalRepository servicioProfesional;
+	
+	@Autowired
+	EmailSenderService emailSender;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MimuniApplication.class, args);
@@ -62,8 +65,27 @@ public class MimuniApplication implements CommandLineRunner {
 //		mostrarServiciosComerciosHabilitados();
 //		crearServicioProfesional();
 //		mostrarServiciosProfesionales();
+		System.out.println(olvideContrasenia("sack@gmail.com"));
+
 //		eliminarServicioProfesional(1);
 	}
+	
+	public String olvideContrasenia(String mail) {
+		List<Vecinoregistrado> vecinosConEseMail = repovecinoregistrado.findByMail(mail);
+		Vecinoregistrado vecino = null;
+		for (Vecinoregistrado v : vecinosConEseMail) {
+			vecino = v;
+		}
+		if (vecino == null) {
+			return "No estas registrado";
+		} else {
+			emailSender.sendEmail("ignaciodorigo@gmail.com", "Contrasenia enviada",
+					"Tu contrasenia es " + vecino.getContrasenia());
+			return "Correo enviado correctamente";
+		}
+	}
+
+
 
 	public void mostrarBarrios() {
 		List<Barrio> barrios = repobarrio.findAll();
@@ -90,6 +112,7 @@ public class MimuniApplication implements CommandLineRunner {
 	public void register(String documento, String mail) {
 		Optional<Vecinoregistrado> vecinoYaRegistrado = repovecinoregistrado.findById(documento);
 		if (vecinoYaRegistrado.isPresent()) {
+			
 			System.out.println("YA ESTAS REGISTRADO");
 		} else {
 			Optional<Vecino> vecinoOptional = repovecino.findById(documento);

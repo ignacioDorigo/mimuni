@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.modelo.Personal;
+import com.example.demo.modelo.ServicioComercio;
 import com.example.demo.modelo.ServicioProfesional;
 import com.example.demo.service.PersonalService;
+import com.example.demo.service.ServicioComercioService;
 import com.example.demo.service.ServicioProfesionalService;
 import com.example.demo.service.VecinoService;
 
@@ -31,6 +33,9 @@ public class Controlador {
 
 	@Autowired
 	ServicioProfesionalService profesionalservice;
+	
+	@Autowired
+	ServicioComercioService comercioservice;
 
 	@PostMapping("/loginInspector")
 	public ResponseEntity<String> loginInspector(@RequestParam Integer legajo, @RequestParam String password) {
@@ -81,6 +86,11 @@ public class Controlador {
 	@GetMapping("/servicios/profesionales")
 	public List<ServicioProfesional> serviciosProfesionales(){
 		return profesionalservice.serviciosProfesionalesHabilitados();
+	}
+	
+	@GetMapping("/servicios/comercios")
+	public List<ServicioComercio> servicioComercios(){
+		return comercioservice.serviciosComerciosHabilitados();
 	}
 
 }

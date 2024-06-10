@@ -57,6 +57,7 @@ public class VecinoService {
 				String contrasenia = documento;
 				Vecinoregistrado nuevoVecino = new Vecinoregistrado(documento, mail, contrasenia, "B", "S");
 				repoVecinoRegistrado.save(nuevoVecino);
+				emailSender.sendEmail("nicolassack2002@gmail.com", "Registro en App MiMuni", "Estimado vecino, su registro en la App fue exitoso. Tenga en cuenta que la habilitación puede demorar hasta 15 días hábiles. Su contraseña provisoria es " + nuevoVecino.getContrasenia());
 				return "Registro exitoso";
 			} else {
 				System.out.println("Entro aca: No es vecino");
@@ -74,7 +75,7 @@ public class VecinoService {
 		if (vecino == null) {
 			return "No estas registrado";
 		} else {
-			emailSender.sendEmail("ignaciodorigo@gmail.com", "Contrasenia enviada",
+			emailSender.sendEmail("nicolassack2002@gmail.com", "Contrasenia enviada",
 					"Tu contrasenia es " + vecino.getContrasenia());
 			return "Correo enviado correctamente";
 		}

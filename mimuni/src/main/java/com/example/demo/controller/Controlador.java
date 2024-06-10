@@ -97,12 +97,14 @@ public class Controlador {
 	}
 	
 
-//	@PostMapping("/vecino/olvidecontrasenia")
-//	public ResponseEntity<String> olvideContrasenia(@RequestParam String mail) {
-//		List<Vecinoregistrado> vecino = 
-//		if() {
-//			
-//		}
-//	}
+	@PostMapping("/vecino/olvidecontrasenia")
+    public ResponseEntity<String> olvideContrasenia(@RequestParam String mail) {
+        String resultado = vecinoservice.olvideContrasenia(mail);
+        if (resultado.equals("Correo enviado correctamente")) {
+            return ResponseEntity.ok(resultado);
+        } else {
+            return ResponseEntity.status(400).body(resultado);
+        }
+    }
 
 }

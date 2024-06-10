@@ -65,7 +65,7 @@ public class MimuniApplication implements CommandLineRunner {
 //		mostrarServiciosComerciosHabilitados();
 //		crearServicioProfesional();
 //		mostrarServiciosProfesionales();
-		System.out.println(olvideContrasenia("sack@gmail.com"));
+//		System.out.println(olvideContrasenia("nicosack@gmail.com"));
 
 //		eliminarServicioProfesional(1);
 	}
@@ -79,8 +79,8 @@ public class MimuniApplication implements CommandLineRunner {
 		if (vecino == null) {
 			return "No estas registrado";
 		} else {
-			emailSender.sendEmail("ignaciodorigo@gmail.com", "Contrasenia enviada",
-					"Tu contrasenia es " + vecino.getContrasenia());
+			emailSender.sendEmail("nicolassack2002@gmail.com", "Contraseña enviada",
+					"Tu contrasenia es " + vecino.getContrasenia() + " . Recordá modificarla cuando ingreses a la aplicación");
 			return "Correo enviado correctamente";
 		}
 	}

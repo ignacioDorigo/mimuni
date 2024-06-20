@@ -21,8 +21,9 @@ public class Personal {
 	private String nombre;
 	private String documento;
 	private String password;
-	private String sector;
+	private Rubro rubro;
 	private Integer categoria;
+	
 	
 	@Column(name = "fechaingreso")
 	private Date fechaIngreso;
@@ -31,14 +32,14 @@ public class Personal {
 
 	}
 
-	public Personal(Integer legajo, String nombre, String documento, String password, String sector, Integer categoria,
+	public Personal(Integer legajo, String nombre, String documento, String password, Rubro rubro, Integer categoria,
 			Date fechaIngreso) {
 		super();
 		this.legajo = legajo;
 		this.nombre = nombre;
 		this.documento = documento;
 		this.password = password;
-		this.sector = sector;
+		this.rubro = rubro;
 		this.categoria = categoria;
 		this.fechaIngreso = fechaIngreso;
 	}
@@ -75,12 +76,14 @@ public class Personal {
 		this.password = password;
 	}
 
-	public String getSector() {
-		return sector;
+
+
+	public Rubro getRubro() {
+		return rubro;
 	}
 
-	public void setSector(String sector) {
-		this.sector = sector;
+	public void setRubro(Rubro rubro) {
+		this.rubro = rubro;
 	}
 
 	public Integer getCategoria() {
@@ -101,7 +104,10 @@ public class Personal {
 
 	@Override
 	public String toString() {
-		return "Personal [legajo=" + legajo + ", nombre=" + nombre + ", documento=" + documento  + ", sector=" + sector + ", categoria=" + categoria + "]";
+		return "Personal [legajo=" + legajo + ", nombre=" + nombre + ", documento=" + documento + ", password="
+				+ password + ", rubro=" + rubro + ", categoria=" + categoria + ", fechaIngreso=" + fechaIngreso + "]";
 	}
+
+	
 
 }

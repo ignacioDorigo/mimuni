@@ -17,6 +17,7 @@ import com.example.demo.modelo.ServicioComercio;
 import com.example.demo.modelo.ServicioProfesional;
 import com.example.demo.modelo.Vecinoregistrado;
 import com.example.demo.service.PersonalService;
+import com.example.demo.service.ReclamoService;
 import com.example.demo.service.ServicioComercioService;
 import com.example.demo.service.ServicioProfesionalService;
 import com.example.demo.service.VecinoService;
@@ -37,6 +38,9 @@ public class Controlador {
 
 	@Autowired
 	ServicioComercioService comercioservice;
+	
+	@Autowired
+	ReclamoService reclamoservice;
 	
 
 	@PostMapping("/loginInspector")
@@ -99,6 +103,15 @@ public class Controlador {
 
 	@PostMapping("/vecino/olvidecontrasenia")
     public ResponseEntity<String> olvideContrasenia(@RequestParam String mail) {
+        String resultado = vecinoservice.olvideContrasenia(mail);
+        if (resultado.equals("Correo enviado correctamente")) {
+            return ResponseEntity.ok(resultado);
+        } else {
+            return ResponseEntity.status(400).body(resultado);
+        }
+    }
+	@PostMapping("/vecino/generarReclamo")
+    public ResponseEntity<String> generarReclamo(@RequestParam String mail) {
         String resultado = vecinoservice.olvideContrasenia(mail);
         if (resultado.equals("Correo enviado correctamente")) {
             return ResponseEntity.ok(resultado);

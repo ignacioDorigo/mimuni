@@ -20,7 +20,7 @@ public class MovimientoDenuncia {
 	private String causa;
 	private Date fecha;
 	@ManyToOne
-	@JoinColumn(name = "idDenuncia", referencedColumnName = "idDenuncia", nullable = false)
+	@JoinColumn(name = "idDenuncia", referencedColumnName = "idDenuncias", nullable = false)
 	private Denuncia denuncia;
 	
 	

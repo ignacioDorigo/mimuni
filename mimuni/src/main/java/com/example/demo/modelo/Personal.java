@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,9 +23,8 @@ public class Personal {
 	private String nombre;
 	private String documento;
 	private String password;
-	private Rubro rubro;
 	private Integer categoria;
-	
+	private String sector;
 	
 	@Column(name = "fechaingreso")
 	private Date fechaIngreso;
@@ -32,14 +33,14 @@ public class Personal {
 
 	}
 
-	public Personal(Integer legajo, String nombre, String documento, String password, Rubro rubro, Integer categoria,
+	public Personal(Integer legajo, String nombre, String documento, String password, Integer categoria,
 			Date fechaIngreso) {
 		super();
 		this.legajo = legajo;
 		this.nombre = nombre;
 		this.documento = documento;
 		this.password = password;
-		this.rubro = rubro;
+
 		this.categoria = categoria;
 		this.fechaIngreso = fechaIngreso;
 	}
@@ -78,13 +79,6 @@ public class Personal {
 
 
 
-	public Rubro getRubro() {
-		return rubro;
-	}
-
-	public void setRubro(Rubro rubro) {
-		this.rubro = rubro;
-	}
 
 	public Integer getCategoria() {
 		return categoria;
@@ -105,7 +99,7 @@ public class Personal {
 	@Override
 	public String toString() {
 		return "Personal [legajo=" + legajo + ", nombre=" + nombre + ", documento=" + documento + ", password="
-				+ password + ", rubro=" + rubro + ", categoria=" + categoria + ", fechaIngreso=" + fechaIngreso + "]";
+				+ password + ", categoria=" + categoria + ", fechaIngreso=" + fechaIngreso + "]";
 	}
 
 	

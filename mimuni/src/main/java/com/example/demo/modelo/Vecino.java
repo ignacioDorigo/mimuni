@@ -25,9 +25,9 @@ public class Vecino {
 	
 	@Basic
 	private Integer codigobarrio;
-    @OneToMany(mappedBy = "denuncia")
+    @OneToMany(mappedBy = "vecino")
     private List<Denuncia> denuncias;
-    @OneToMany(mappedBy = "reclamo")
+    @OneToMany(mappedBy = "vecino")
     private List<Reclamo> reclamos;
 	
 	public Vecino(){

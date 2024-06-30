@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.modelo.Personal;
 import com.example.demo.modelo.ServicioComercio;
@@ -110,8 +111,9 @@ public class Controlador {
             return ResponseEntity.status(400).body(resultado);
         }
     }
-	@PostMapping("/vecino/generarReclamo")
-    public ResponseEntity<String> generarReclamo(@RequestParam String mail) {
+	@PostMapping("/vecino/generarReclamoVecino")
+    public ResponseEntity<String> generarReclamo(@RequestParam String mail,@RequestParam Integer idSitio, @RequestParam  Integer idDesperfecto,@RequestParam String descripcion,
+    		@RequestParam MultipartFile[] files) {
         String resultado = vecinoservice.olvideContrasenia(mail);
         if (resultado.equals("Correo enviado correctamente")) {
             return ResponseEntity.ok(resultado);

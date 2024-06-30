@@ -1,7 +1,7 @@
 package com.example.demo.modelo;
 
 import java.util.List;
-
+import java.util.ArrayList;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -53,18 +53,16 @@ public class Reclamo {
 				+ ", desperfecto=" + desperfecto + ", movimientosReclamo=" + movimientosReclamo + ", sitio=" + sitio
 				+ "]";
 	}
-	public Reclamo(Integer idReclamo, String descripcion, String estado, Integer idReclamoUnificado, Personal personal,
-			Vecino vecino, Desperfecto desperfecto, List<MovimientoReclamo> movimientosReclamo, Sitio sitio) {
+	public Reclamo( String descripcion, Personal personal,
+			Vecino vecino, Desperfecto desperfecto, Sitio sitio) {
 		super();
-		this.idReclamo = idReclamo;
 		this.descripcion = descripcion;
-		this.estado = estado;
-		IdReclamoUnificado = idReclamoUnificado;
+		this.estado = "iniciado";
 		this.personal = personal;
 		this.vecino = vecino;
 		this.desperfecto = desperfecto;
-		this.movimientosReclamo = movimientosReclamo;
 		this.sitio = sitio;
+		this.movimientosReclamo =new ArrayList<>();
 	}
 	public Integer getIdReclamo() {
 		return idReclamo;

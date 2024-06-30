@@ -1,6 +1,7 @@
 package com.example.demo.modelo;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -78,16 +79,15 @@ public class Denuncia {
 				+ ", aceptaResonsabilidad=" + aceptaResonsabilidad + ", vecino=" + vecino + ", sitio=" + sitio
 				+ ", movimientosDenuncia=" + movimientosDenuncia + "]";
 	}
-	public Denuncia(Integer idDenuncia, String descripcion, String estado, int aceptaResonsabilidad, Vecino vecino,
-			Sitio sitio, List<MovimientoDenuncia> movimientosDenuncia) {
+	public Denuncia( String descripcion, int aceptaResonsabilidad, Vecino vecino,
+			Sitio sitio) {
 		super();
-		this.idDenuncia = idDenuncia;
 		this.descripcion = descripcion;
-		this.estado = estado;
+		this.estado = "iniciado";
 		this.aceptaResonsabilidad = aceptaResonsabilidad;
 		this.vecino = vecino;
 		this.sitio = sitio;
-		this.movimientosDenuncia = movimientosDenuncia;
+		this.movimientosDenuncia =new ArrayList<>();
 	}
 	
 	public Denuncia() {

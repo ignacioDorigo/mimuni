@@ -21,7 +21,7 @@ public class Desperfecto {
 	@ManyToOne
 	@JoinColumn(name = "idRubro", referencedColumnName = "idRubro", nullable = false)
 	private Rubro rubro;
-    @OneToMany(mappedBy = "reclamo")
+    @OneToMany(mappedBy = "desperfecto")
     private List<Reclamo> reclamos;
     
     public Desperfecto() {

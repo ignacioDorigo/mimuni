@@ -29,7 +29,7 @@ public class Sitio {
 	private Date apertura;
 	private Date cierre;
 	private List<String> comentarios;
-	@OneToMany(mappedBy = "Sitio")
+	@OneToMany(mappedBy = "sitio")
 	private List<Denuncia> denuncia;
 	
 	public Sitio() {

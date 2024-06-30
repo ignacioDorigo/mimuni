@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.UploadFilesService;
 import com.example.demo.modelo.Desperfecto;
 import com.example.demo.modelo.MovimientoReclamo;
+import com.example.demo.modelo.Personal;
 import com.example.demo.modelo.Reclamo;
 import com.example.demo.modelo.Sitio;
 import com.example.demo.modelo.Vecino;
@@ -36,6 +37,9 @@ public class ReclamoService {
 
 	@Autowired
 	DesperfectoService desperfectoService;
+	
+	@Autowired
+	PersonalService personalService;
 
 	@Autowired
 	UploadFilesService guardarImagenes;
@@ -61,7 +65,6 @@ public class ReclamoService {
 					Reclamo nuevoReclamo = new Reclamo(descripcion, null, vecino, desperfecto, sitio);
 
 					reclamoRepository.save(nuevoReclamo);
-
 					Reclamo r = ultimoReclamo();
 					guardarImagenes.handleFileUpload(r.getIdReclamo(), files);
 
@@ -76,6 +79,37 @@ public class ReclamoService {
 			}
 		} else {
 			return "Vecino no encontrado";
+		}
+	}
+	public String generarReclamoVecino(int legajo, Integer idSitio, Integer idDesperfecto, String descripcion,
+			MultipartFile[] files) {
+//		Aca tenemsos el documento
+		Personal inspector = personalService.perfilInspector(legajo);
+		if (inspector != null) {
+			// Validamos el sitio
+			Sitio sitio = sitioService.buscarSitio(idSitio);
+			if (sitio != null) {
+				// Validamos desperfecto
+				Desperfecto desperfecto = desperfectoService.buscarDesperfectoId(idDesperfecto);
+				if (desperfecto != null) {
+					Reclamo nuevoReclamo = new Reclamo(descripcion, inspector, null, desperfecto, sitio);
+
+					reclamoRepository.save(nuevoReclamo);
+
+					Reclamo r = ultimoReclamo();
+					guardarImagenes.handleFileUpload(r.getIdReclamo(), files);
+
+					return "Reclamo generado con exito";
+
+				} else {
+					return "Desperfecto no encontrado";
+				}
+
+			} else {
+				return "Sitio no encontrado";
+			}
+		} else {
+			return "Inspector no encontrado";
 		}
 	}
 

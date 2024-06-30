@@ -111,7 +111,7 @@ public class Controlador {
             return ResponseEntity.status(400).body(resultado);
         }
     }
-	@PostMapping("/vecino/generarReclamoVecino")
+	@PostMapping("/vecino/generarReclamo")
     public ResponseEntity<String> generarReclamo(@RequestParam String mail,@RequestParam Integer idSitio, @RequestParam  Integer idDesperfecto,@RequestParam String descripcion,
     		@RequestParam MultipartFile[] files) {
         String resultado = vecinoservice.olvideContrasenia(mail);

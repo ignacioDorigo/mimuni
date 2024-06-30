@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.modelo.Personal;
+import com.example.demo.modelo.Vecino;
 import com.example.demo.repository.PersonalRepository;
 
 @Service
@@ -66,5 +67,6 @@ public class PersonalService {
 	public List<Personal> inspectores() {
 		return repositorio.findAll();
 	}
+
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.modelo.Denuncia;
+import com.example.demo.modelo.Personal;
 import com.example.demo.modelo.Sitio;
 import com.example.demo.modelo.Vecino;
 import com.example.demo.repository.DenunciaRepository;
@@ -48,7 +49,14 @@ public class DenunciaService {
 		}
 	}
 	public Denuncia traerDenuncia(Integer iddenuncia) {
-		return denunciaRepository.findByidDenuncia(iddenuncia);
+		Optional<Denuncia> denunciaOptional = denunciaRepository.findByidDenuncia(iddenuncia);
+		if (denunciaOptional.isPresent()) {
+//			Encontramos al inspector
+			Denuncia denuncia = denunciaOptional.get();
+			return denuncia;
+		} else {
+			return null;
+		}
 		
 	}
 }
